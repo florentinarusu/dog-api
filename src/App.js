@@ -9,7 +9,7 @@ import InfiniteScroll from "./components/InfiniteScroll";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/dog-api">
       <Navbar />
       <Routes>
         <Route path="/my-images" element={<MyImages />} />
