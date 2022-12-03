@@ -11,8 +11,8 @@ const MyImages = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [disabled, setDisabled] = useState(false);
 
-  const getImages = async () => {
-    const api = `https://api.thedogapi.com/v1/images/?limit=2&page=${pageNumber}&order=DESC`;
+  const getImages = async (pageNumber = 0) => {
+    const api = `https://api.thedogapi.com/v1/images/?limit=2&order=DESC&page=${pageNumber}`;
     const response = await fetch(api, {
       headers: { "x-api-key": apiKey },
     });
@@ -23,7 +23,7 @@ const MyImages = () => {
     } else {
       setImages(result);
     }
-    if (result === 0) {
+    if (result.length === 0) {
       setDisabled(true);
     }
   };
@@ -31,9 +31,9 @@ const MyImages = () => {
     getImages();
   }, []);
 
-  const loadImage = () => {
-    getImages();
-  };
+  // const loadImage = () => {
+  //   getImages();
+  // };
 
   return (
     <div>
@@ -50,9 +50,9 @@ const MyImages = () => {
           />
         </div>
       ))}
-      {/* <button disabled={disabled} onClick={loadImage}>
+      <button disabled={disabled} onClick={(e) => getImages(e.target.value)}>
         Load more...
-      </button> */}
+      </button>
       <Pagination
         setPageNumber={setPageNumber}
         pageNumber={pageNumber}

@@ -15,7 +15,7 @@ const InfiniteScroll = () => {
     });
     const result = await response.json();
     setImages((images) => [...images, ...result]);
-    if (response.status != 200) {
+    if (response.status !== 200) {
       if (result.length < 2) {
         setFetchMore(false);
       }
